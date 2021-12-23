@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: 'app-php'
+    privileged: true
+    networks:
+      - empiricus-network
+    volumes:
+      - ./:/var/www
+      - ./docker/php/log:/var/log/php
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: 'app-nginx'
+    ports:
+      - '9999:80'
+    privileged: true
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/certs/certificate.crt:/etc/nginx/conf.d/certificate.crt
+      - ./docker/nginx/certs/certificate.key:/etc/nginx/conf.d/certificate.key
+      - ./docker/nginx/log:/var/log/nginx
+    networks:
+      - empiricus-network
+
+  database:
+    build:
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile
+    container_name: 'app-database'
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=empiricus
+      - POSTGRES_PASSWORD=empiricus
+      - POSTGRES_DB=empiricus
+    volumes:
+      - ./docker/postgres/volume:/var/lib/postgresql
+    networks:
+      - empiricus-network
+
+networks:
+  empiricus-network:
+    external: true

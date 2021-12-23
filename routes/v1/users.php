@@ -6,8 +6,10 @@ use Laravel\Lumen\Routing\Router;
 $router->group(
     ['prefix' => '/users'],
     function () use ($router) {
-        $router->get('/', function() {
-            return 'index';
-        });
+        $router->get('/', 'UserController@index');
+        $router->get('/{id}', 'UserController@show');
+        $router->post('/', 'UserController@store');
+        $router->put('/{id}', 'UserController@update');
+        $router->delete('/{id}', 'UserController@delete');
     }
 );

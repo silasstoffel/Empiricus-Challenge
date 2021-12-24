@@ -46,4 +46,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
     chmod -R 755 /var/www/storage /var/www/bootstrap/cache
 
+RUN chown -Rf www-data:www-data storage/log
+
 CMD ["php-fpm"]

@@ -7,17 +7,21 @@ use Illuminate\Http\Request;
 
 use Empiricus\Application\Users\Create\CreateUseCase;
 use Empiricus\Application\Users\Create\CreateDTO;
+use Empiricus\Application\Users\ReadAll\ReadAllUseCase;
+
 
 class UserController extends Controller
 {
     public function __construct(
-        private CreateUseCase $createUseCase
+        private CreateUseCase $createUseCase,
+        private ReadAllUseCase $readAllUseCase
     ) {
     }
 
     public function index(): JsonResponse
     {
-        return $this->toJsonResponse(['message' => 'message']);
+        $users = $this->readAllUseCase->execute();
+        return $this->toJsonResponse($users);
     }
 
     public function show(string $id): JsonResponse

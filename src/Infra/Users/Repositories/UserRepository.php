@@ -53,11 +53,31 @@ class UserRepository implements UserRepositoryInterface
 
         $model->save();
 
-        $data = array_merge(
-            $model->toArray(),
-            ['password' => $user->password, 'avatarUrl' => $model->avatar_url]
-        );
+        $data = $this->adaptResult($model, $user->password);
 
         return User::fromArray($data);
+    }
+
+    /**
+     * Find all users
+     * @return User[]
+     */
+    public function findAll(): array
+    {
+        $results = [];
+        $users = UserEloquent::all();
+        foreach ($users as $user) {
+            $results[] = User::fromArray($this->adaptResult($user, $user->password));
+        }
+        return $results;
+    }
+
+    private function adaptResult($model, string $password = null): array
+    {
+        $pwd = is_null($password) ? $model->password_hash : $password;
+        return array_merge(
+            $model->toArray(),
+            ['password' => $pwd, 'avatarUrl' => $model->avatar_url]
+        );
     }
 }

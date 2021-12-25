@@ -47,5 +47,4 @@ class UserController extends Controller
     {
         return $this->toJsonResponse(null, 204);
     }
-
 }

@@ -41,7 +41,9 @@ class User
             $data['role'],
             $data['city'],
             $data['password'],
-            $data['avatarUrl']
+            $data['avatarUrl'],
+            $data['createdAt'],
+            $data['updatedAt'],
         );
     }
 
@@ -57,5 +59,4 @@ class User
             'avatarUrl' => $this->avatarUrl,
         ];
     }
-
 }

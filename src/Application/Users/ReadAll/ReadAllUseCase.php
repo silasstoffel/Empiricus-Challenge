@@ -15,8 +15,8 @@ class ReadAllUseCase
      * Find all users
      * @return User[]
      */
-    public function execute(): array
+    public function execute($showPasspordAsNull = true): array
     {
-        return $this->repository->findAll();
+        return $this->repository->findAll($showPasspordAsNull);
     }
 }

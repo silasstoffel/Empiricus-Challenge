@@ -2,8 +2,6 @@
 
 namespace Empiricus\Application\Users;
 
-use Empiricus\Application\Users\Create\CreateDTO;
-
 class UserDTO
 {
     public function __construct(
@@ -17,7 +15,7 @@ class UserDTO
     ) {
     }
 
-    public static function fromArray(array $data): UserDTO
+    public static function fromArray(array $data): self
     {
         $data = array_merge(
             [
@@ -32,7 +30,7 @@ class UserDTO
             $data
         );
 
-        return new CreateDTO(
+        return new UserDTO(
             $data['id'],
             $data['name'],
             $data['email'],

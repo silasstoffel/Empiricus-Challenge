@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Empiricus\Application\Users\UserDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 use Empiricus\Application\Users\Create\CreateUseCase;
-use Empiricus\Application\Users\Create\CreateDTO;
 use Empiricus\Application\Users\ReadAll\ReadAllUseCase;
 use Empiricus\Application\Users\Delete\DeleteUseCase;
 use Empiricus\Application\Users\Read\ReadUseCase;
+use Empiricus\Application\Users\Update\UpdateUseCase;
+
 
 class UserController extends Controller
 {
@@ -17,7 +19,8 @@ class UserController extends Controller
         private CreateUseCase $createUseCase,
         private ReadAllUseCase $readAllUseCase,
         private ReadUseCase $readUseCase,
-        private DeleteUseCase $deleteUseCase
+        private DeleteUseCase $deleteUseCase,
+        private UpdateUseCase $updateUseCase
     ) {
     }
 
@@ -41,14 +44,19 @@ class UserController extends Controller
     public function store(Request $request): JsonResponse
     {
         $user = $this->createUseCase->execute(
-            CreateDTO::fromArray($request->all())
+            UserDTO::fromArray($request->all())
         );
 
         return $this->toJsonResponse($user->toArray(true), 201);
     }
 
-    public function update(string $id): JsonResponse
+    public function update(Request $request, string $id): JsonResponse
     {
+        $request['id'] = $id;
+        $this->updateUseCase->execute(
+            UserDTO::fromArray($request->all())
+        );
+
         return $this->toJsonResponse(null, 204);
     }
 

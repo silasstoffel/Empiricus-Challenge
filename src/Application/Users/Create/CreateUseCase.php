@@ -2,6 +2,7 @@
 
 namespace Empiricus\Application\Users\Create;
 
+use Empiricus\Application\Users\UserDTO;
 use Empiricus\Domain\Shared\PrimaryKey\PrimaryKeyCreatorInterface;
 use Empiricus\Domain\Users\User;
 use Empiricus\Domain\Users\UserRepositoryInterface;
@@ -16,7 +17,7 @@ class CreateUseCase
     ) {
     }
 
-    public function execute(CreateDTO $dto): User
+    public function execute(UserDTO $dto): User
     {
         $data = array_merge(
             $dto->toArray(), ['id' => $this->primaryKeyCreator->create()]

@@ -4,17 +4,43 @@ namespace Empiricus\Domain\Users;
 
 class User
 {
+    private $roles = ['admin', 'customer', 'analist', 'crm'];
+    public readonly string $role;
+    public readonly string $email;
+    public readonly string $name;
+    public readonly string $city;
+
     public function __construct(
         public readonly ?string $id,
-        public readonly string $name,
-        public readonly string $email,
-        public readonly string $role,
-        public readonly string $city,
+        string $name,
+        string $email,
+        string $role,
+        string $city,
         public readonly ?string $password,
         public readonly ?string $avatarUrl = null,
         public readonly ?string $createdAt = null,
         public readonly ?string $updatedAt = null,
     ) {
+        if (!in_array($role, $this->roles)) {
+            throw new \InvalidArgumentException('Argument role is not valid.');
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new \InvalidArgumentException('Argument email is not valid.');
+        }
+
+        if (!strlen(trim($name))) {
+            throw new \InvalidArgumentException('Argument name is required.');
+        }
+
+        if (!strlen(trim($city))) {
+            throw new \InvalidArgumentException('Argument city is required.');
+        }
+
+        $this->role  = $role;
+        $this->email = $email;
+        $this->name = $name;
+        $this->city = $city;
     }
 
     public static function fromArray(array $data): self

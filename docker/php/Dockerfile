@@ -1,4 +1,4 @@
-FROM composer
+FROM composer as composer
 
 FROM php:8.1.0-fpm
 
@@ -43,9 +43,16 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 ########################################################################################################################
 # Laravel logs permission
 ########################################################################################################################
-RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
-    chmod -R 755 /var/www/storage /var/www/bootstrap/cache
+#RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
+#    chmod -R 755 /var/www/storage /var/www/bootstrap/cache
 
-RUN chown -Rf www-data:www-data storage/log
+#RUN chown -Rf www-data:www-data storage/log
+
 
 CMD ["php-fpm"]
+
+#COPY . .
+
+#RUN composer install
+
+#CMD ["php", "artisan", "migrate"]

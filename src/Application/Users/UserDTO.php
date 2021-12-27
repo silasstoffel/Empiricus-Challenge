@@ -12,6 +12,8 @@ class UserDTO
         public readonly string $city,
         public readonly string $password,
         public readonly ?string $avatarUrl = null,
+        public readonly ?string $createdUserId = null,
+        public readonly ?string $updatedUserId = null,
     ) {
     }
 
@@ -19,13 +21,15 @@ class UserDTO
     {
         $data = array_merge(
             [
-                'id'        => '',
-                'name'      => '',
-                'email'     => '',
-                'role'      => '',
-                'avatarUrl' => '',
-                'city'      => '',
-                'password'  => '',
+                'id'            => '',
+                'name'          => '',
+                'email'         => '',
+                'role'          => '',
+                'avatarUrl'     => '',
+                'city'          => '',
+                'password'      => '',
+                'createdUserId' => '',
+                'updatedUserId' => '',
             ],
             $data
         );
@@ -37,20 +41,24 @@ class UserDTO
             $data['role'],
             $data['city'],
             $data['password'],
-            $data['avatarUrl']
+            $data['avatarUrl'],
+            $data['createdUserId'],
+            $data['updatedUserId']
         );
     }
 
     public function toArray(): array
     {
         return [
-            'id'        => $this->id,
-            'name'      => $this->name,
-            'email'     => $this->email,
-            'role'      => $this->role,
-            'avatarUrl' => $this->avatarUrl,
-            'city'      => $this->city,
-            'password'  => $this->password,
+            'id'            => $this->id,
+            'name'          => $this->name,
+            'email'         => $this->email,
+            'role'          => $this->role,
+            'avatarUrl'     => $this->avatarUrl,
+            'city'          => $this->city,
+            'password'      => $this->password,
+            'createdUserId' => $this->createdUserId,
+            'updatedUserId' => $this->updatedUserId,
         ];
     }
 }

@@ -102,4 +102,25 @@ class UserRepository implements UserRepositoryInterface
 
         $user->delete();
     }
+
+    public function findByEmail(string $email, $showPasswordAsNull = false): ?User
+    {
+        $user = UserEloquent::where('email', $email)->first();
+        if ($user) {
+            $password = $showPasswordAsNull ? null : $user->password_hash;
+            return new User(
+                $user->id,
+                $user->name,
+                $user->email,
+                $user->role,
+                $user->city,
+                $password,
+                $user->avatar_url,
+                $user->created_at,
+                $user->updated_at,
+            );
+        }
+
+        return null;
+    }
 }

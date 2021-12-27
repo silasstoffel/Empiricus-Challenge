@@ -44,7 +44,7 @@ class CreateUseCase
         $user = $this->repository->find($dto->createdUserId);
 
         if (!$user) {
-            throw new \DomainException("Created user id defined not exists.");
+            throw new \InvalidArgumentException("Created user id defined not exists.");
         }
 
         if ($user->role !== 'admin') {

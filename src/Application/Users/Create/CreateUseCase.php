@@ -19,15 +19,14 @@ class CreateUseCase
 
     public function execute(UserDTO $dto): User
     {
-        $user = $this->repository->findByEmail($dto->email);
-
-        if (!is_null($user)) {
-            throw new \DomainException("E-mail already exists.");
+        if (!strlen(trim($dto->password))) {
+            throw new \InvalidArgumentException("Password is required.");
         }
 
         $this->checkPermission($dto);
+        $this->checkUser($dto);
 
-        $data = array_merge(
+        $data             = array_merge(
             $dto->toArray(), ['id' => $this->primaryKeyCreator->create()]
         );
         $data['password'] = $this->passwordManager->crypt($dto->password);
@@ -35,7 +34,7 @@ class CreateUseCase
         return $this->repository->save(User::fromArray($data));
     }
 
-    private function checkPermission(UserDTO $dto)
+    private function checkPermission(UserDTO $dto): void
     {
         if (!$dto->createdUserId) {
             throw new \InvalidArgumentException("createdUserId is required.");
@@ -49,6 +48,15 @@ class CreateUseCase
 
         if ($user->role !== 'admin') {
             throw new \DomainException("You don't have permission to create users.");
+        }
+    }
+
+    private function checkUser(UserDTO $dto): void
+    {
+        $user = $this->repository->findByEmail($dto->email);
+
+        if (!is_null($user)) {
+            throw new \DomainException("E-mail already exists.");
         }
     }
 }

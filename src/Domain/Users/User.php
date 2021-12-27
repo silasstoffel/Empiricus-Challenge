@@ -9,6 +9,7 @@ class User
     public readonly string $email;
     public readonly string $name;
     public readonly string $city;
+    public readonly ?string $avatarUrl;
 
     public function __construct(
         public readonly ?string $id,
@@ -17,7 +18,7 @@ class User
         string $role,
         string $city,
         public readonly ?string $password,
-        public readonly ?string $avatarUrl = null,
+        ?string $avatarUrl = null,
         public readonly ?string $createdAt = null,
         public readonly ?string $updatedAt = null,
     ) {
@@ -37,10 +38,15 @@ class User
             throw new \InvalidArgumentException('Argument city is required.');
         }
 
-        $this->role  = $role;
-        $this->email = $email;
-        $this->name = $name;
-        $this->city = $city;
+        if (strlen(trim($avatarUrl)) && !filter_var($avatarUrl, FILTER_VALIDATE_URL)) {
+            throw new \InvalidArgumentException('Avatar URL is not valid.');
+        }
+
+        $this->role      = $role;
+        $this->email     = $email;
+        $this->name      = $name;
+        $this->city      = $city;
+        $this->avatarUrl = $avatarUrl;
     }
 
     public static function fromArray(array $data): self

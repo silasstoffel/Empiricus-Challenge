@@ -10,7 +10,7 @@ class UserDTO
         public readonly string $email,
         public readonly string $role,
         public readonly string $city,
-        public readonly string $password,
+        public readonly ?string $password,
         public readonly ?string $avatarUrl = null,
         public readonly ?string $createdUserId = null,
         public readonly ?string $updatedUserId = null,

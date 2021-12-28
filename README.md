@@ -43,6 +43,18 @@ Usando docker ou não, o primeiro passo é fazer uma cópia do `.env.example` e 
 
 **Docker**
 
+Se estiver em ambiente linux, existem dois scripts sh que fazem todo o fluxo de setup e entrega um ambiente funcional. Para isso,
+garanta que scripts do diretório `./bin` tenha direito de execução e depois rode esses comandos em sequência:
+
+```shell
+sh ./bin/run-env.sh
+
+# em outra janela do terminal execute:
+sh ./bin/config-env.sh
+```
+Executando os dois scripts, seu ambiente estará configurado e não haverá necessidade de rodar comandos individuais para montar ambiente com docker.
+
+
 No diretório raíz do projeto execute os comandos abaixo que todo ambiente será levantado para testar a aplicação.
 
 ```shell

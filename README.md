@@ -39,6 +39,8 @@
 
 ## Setup
 
+Usando docker ou não, o primeiro passo é fazer uma cópia do `.env.example` e renomear a cópia para `.env`. Por padrão já vem uma configuração default, mas pode ser personalizada com suas configurações.
+
 **Docker**
 
 No diretório raíz do projeto execute os comandos abaixo que todo ambiente será levantado para testar a aplicação.

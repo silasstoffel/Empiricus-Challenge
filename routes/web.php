@@ -1,9 +1,9 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
+/** @var Router $router */
+
+use Laravel\Lumen\Routing\Router;
+
+$router->get('/', 'AppController@docs');
 
 $router->get('/docs', 'AppController@docs');
-
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});

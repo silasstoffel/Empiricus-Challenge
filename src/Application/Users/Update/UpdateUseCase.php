@@ -4,15 +4,15 @@ namespace Empiricus\Application\Users\Update;
 
 use Empiricus\Application\Users\UserDTO;
 use Empiricus\Application\Users\UserRole;
+use Empiricus\Domain\Shared\Password\PasswordManagerInterface;
 use Empiricus\Domain\Users\User;
 use Empiricus\Domain\Users\UserRepositoryInterface;
-use Empiricus\Infra\Shared\Password\PasswordManager;
 
 class UpdateUseCase
 {
     public function __construct(
         private UserRepositoryInterface $repository,
-        private PasswordManager $passwordManager
+        private PasswordManagerInterface $passwordManager
     ) {
     }
 
@@ -32,8 +32,8 @@ class UpdateUseCase
 
     private function checkPermission(UserDTO $dto): void
     {
-        if (!$dto->userIdAction) {
-            throw new \InvalidArgumentException("User (UserIdAction) is required.");
+        if (!strlen(trim($dto->userIdAction))) {
+            throw new \InvalidArgumentException("User (userIdAction) is required.");
         }
 
         $role = new UserRole($this->repository);

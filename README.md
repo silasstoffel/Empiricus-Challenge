@@ -123,4 +123,5 @@ Essa aplicação foi projetada seguindo alguns princípios e techs, tais como:
 - Use Cases
 - Repositories
 
-
+A idéia de seguir princípios de clean Arch é poder desenvolver soluções que não fiquem acompladas a framework do momento ou amarrar a aplicação a complexidades de domínio técnico. Isso facilita a troca de techs do projeto, protegendo o domínio da aplicação. Em caso de mudanças de framework, ORM, Client HTTP, Banco de dados e etc, exigirá esforço apenas para implementar os contratos de infra (./src/Infra) enquanto as camadas de ./src/Domain e ./src/Aplication estão blindadas a mudanças de complexidade técnicas.
+Outro benefício é possibilidade de testar todas às regras de negócio que ficam nos use cases.

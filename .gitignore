@@ -10,7 +10,7 @@
 .project
 .settings
 .environment
-.env
+.env.backup
 .phpunit.result.cache
 
 

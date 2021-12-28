@@ -1,0 +1,404 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Empiricus - User API",
+        "description": "Documentação do micro serviço de usuários.",
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/v1/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Carrega uma lista de usuários",
+                "description": "Carrega lista de usuários disponíveis",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuários encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de uma ação disparada pelo consumidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Criar usuário",
+                "description": "Cadastra um usuário",
+                "requestBody": {
+                    "description": "Cadastra um usuario",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cadastro efetivado com sucesso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de uma ação disparada pelo consumidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validação de uma ação disparada pelo consumidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Deleta todos usuários",
+                "description": "Deleta todos usuários",
+                "requestBody": {
+                    "description": "Corpo para deletar todos usuarios",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserDeleteAllPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Usuários deletados com sucesso."
+                    },
+                    "400": {
+                        "description": "Erro de uma ação disparada pelo consumidor.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validação de uma ação disparada pelo consumidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Carrega um usuário",
+                "description": "Carrega dados de um usuário pelo ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cadastro encontrado sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de uma ação disparada pelo consumidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Atualiza um usuário",
+                "description": "Atualiza um usuário",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Atributos para atualização do usuário",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserPayload"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Usuário atualizado com sucesso."
+                    },
+                    "400": {
+                        "description": "Erro de uma ação disparada pelo consumidor.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validação de uma ação disparada pelo consumidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Deleta um usuário",
+                "description": "Deleta um usuário",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Usuário deletado com sucesso."
+                    },
+                    "400": {
+                        "description": "Erro de uma ação disparada pelo consumidor.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validação de uma ação disparada pelo consumidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Error": {
+                "title": "Error",
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "description": "Mensagem de erro",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UserPayload": {
+                "title": "UserPayload",
+                "required": [
+                    "name",
+                    "email",
+                    "role",
+                    "city"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Identificação do usuário",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Nome",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "E-mail",
+                        "type": "string"
+                    },
+                    "role": {
+                        "description": "Papel do usuario no sistema. Valores aceitos: admin, customer, analist e crm",
+                        "type": "string"
+                    },
+                    "city": {
+                        "description": "Cidade",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "Senha. Somente é obrigatório no cadastro",
+                        "type": "string"
+                    },
+                    "avatarUrl": {
+                        "description": "URL do foto ou avatar do usuário",
+                        "type": "string"
+                    },
+                    "userIdAction": {
+                        "description": "ID do usuario que está executando uma ação. Com esse parametro, será validado às permissões.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "required": [
+                    "name",
+                    "email",
+                    "role",
+                    "city"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Identificação do usuário",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Nome",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "E-mail",
+                        "type": "string"
+                    },
+                    "role": {
+                        "description": "Papel do usuario no sistema. Valores aceitos: admin, customer, analist e crm",
+                        "type": "string"
+                    },
+                    "city": {
+                        "description": "Cidade",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "Senha. Somente é obrigatório no cadastro. Nas reposta essa esse valor será omitido",
+                        "type": "string"
+                    },
+                    "avatarUrl": {
+                        "description": "URL do foto ou avatar do usuário",
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "description": "Criado em",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "description": "Alterado em",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UserDeleteAllPayload": {
+                "title": "UserDeleteAllPayload",
+                "required": [
+                    "userIdAction"
+                ],
+                "properties": {
+                    "userIdAction": {
+                        "description": "ID do usuario que está executando uma ação",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

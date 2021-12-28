@@ -11,5 +11,4 @@ abstract class Controller extends BaseController
     {
         return response()->json($data, $httpCode);
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Empiricus\Application\Users\Delete\DeleteAllUseCase;
 use Empiricus\Application\Users\UserDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class UserController extends Controller
         private ReadAllUseCase $readAllUseCase,
         private ReadUseCase $readUseCase,
         private DeleteUseCase $deleteUseCase,
-        private UpdateUseCase $updateUseCase
+        private UpdateUseCase $updateUseCase,
+        private DeleteAllUseCase $deleteAllUseCase
     ) {
     }
 
@@ -63,6 +65,13 @@ class UserController extends Controller
     public function delete(string $id): JsonResponse
     {
         $this->deleteUseCase->execute($id);
+        return $this->toJsonResponse(null, 204);
+    }
+
+    public function deleteAll(Request $request): JsonResponse
+    {
+        $userId = $request->userIdAction ?? '';
+        $this->deleteAllUseCase->execute($userId);
         return $this->toJsonResponse(null, 204);
     }
 }

@@ -12,8 +12,7 @@ class UserDTO
         public readonly string $city,
         public readonly ?string $password,
         public readonly ?string $avatarUrl = null,
-        public readonly ?string $createdUserId = null,
-        public readonly ?string $updatedUserId = null,
+        public readonly ?string $userIdAction = null,
     ) {
     }
 
@@ -21,15 +20,14 @@ class UserDTO
     {
         $data = array_merge(
             [
-                'id'            => '',
-                'name'          => '',
-                'email'         => '',
-                'role'          => '',
-                'avatarUrl'     => '',
-                'city'          => '',
-                'password'      => '',
-                'createdUserId' => '',
-                'updatedUserId' => '',
+                'id'           => '',
+                'name'         => '',
+                'email'        => '',
+                'role'         => '',
+                'avatarUrl'    => '',
+                'city'         => '',
+                'password'     => '',
+                'userIdAction' => '',
             ],
             $data
         );
@@ -42,23 +40,21 @@ class UserDTO
             $data['city'],
             $data['password'],
             $data['avatarUrl'],
-            $data['createdUserId'],
-            $data['updatedUserId']
+            $data['userIdAction']
         );
     }
 
     public function toArray(): array
     {
         return [
-            'id'            => $this->id,
-            'name'          => $this->name,
-            'email'         => $this->email,
-            'role'          => $this->role,
-            'avatarUrl'     => $this->avatarUrl,
-            'city'          => $this->city,
-            'password'      => $this->password,
-            'createdUserId' => $this->createdUserId,
-            'updatedUserId' => $this->updatedUserId,
+            'id'           => $this->id,
+            'name'         => $this->name,
+            'email'        => $this->email,
+            'role'         => $this->role,
+            'avatarUrl'    => $this->avatarUrl,
+            'city'         => $this->city,
+            'password'     => $this->password,
+            'userIdAction' => $this->userIdAction,
         ];
     }
 }

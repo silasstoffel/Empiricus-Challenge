@@ -3,6 +3,7 @@
 namespace Empiricus\Application\Users\Create;
 
 use Empiricus\Application\Users\UserDTO;
+use Empiricus\Application\Users\UserRole;
 use Empiricus\Domain\Shared\Password\PasswordManagerInterface;
 use Empiricus\Domain\Shared\PrimaryKey\PrimaryKeyCreatorInterface;
 use Empiricus\Domain\Users\User;
@@ -36,17 +37,13 @@ class CreateUseCase
 
     private function checkPermission(UserDTO $dto): void
     {
-        if (!$dto->createdUserId) {
-            throw new \InvalidArgumentException("createdUserId is required.");
+        if (!$dto->userIdAction) {
+            throw new \InvalidArgumentException("User (UserIdAction) is required.");
         }
 
-        $user = $this->repository->find($dto->createdUserId);
+        $role = new UserRole($this->repository);
 
-        if (!$user) {
-            throw new \InvalidArgumentException("Created user id defined not exists.");
-        }
-
-        if ($user->role !== 'admin') {
+        if (!$role->isAdmin($dto->userIdAction)) {
             throw new \DomainException("You don't have permission to create users.");
         }
     }

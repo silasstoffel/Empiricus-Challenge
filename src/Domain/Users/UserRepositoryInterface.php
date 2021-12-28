@@ -13,4 +13,6 @@ interface UserRepositoryInterface
     public function save(User $user, ?string $id = null): User;
 
     public function delete(string $id): void;
+
+    public function deleteAll(): void;
 }

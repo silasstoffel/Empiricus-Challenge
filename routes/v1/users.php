@@ -11,5 +11,6 @@ $router->group(
         $router->post('/', 'UserController@store');
         $router->put('/{id}', 'UserController@update');
         $router->delete('/{id}', 'UserController@delete');
+        $router->delete('/', 'UserController@deleteAll');
     }
 );

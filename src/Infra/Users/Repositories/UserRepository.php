@@ -123,4 +123,9 @@ class UserRepository implements UserRepositoryInterface
 
         return null;
     }
+
+    public function deleteAll(): void
+    {
+        UserEloquent::query()->delete();
+    }
 }

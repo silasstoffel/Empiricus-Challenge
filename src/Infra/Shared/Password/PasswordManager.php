@@ -3,6 +3,7 @@
 namespace Empiricus\Infra\Shared\Password;
 
 use Empiricus\Domain\Shared\Password\PasswordManagerInterface;
+use Throwable;
 
 class PasswordManager implements PasswordManagerInterface
 {
@@ -23,7 +24,7 @@ class PasswordManager implements PasswordManagerInterface
      * @param string $passwordDecrypt Password decrypt
      * @param string $passwordCrypt password crypt
      * @return void
-     * @throws Exception
+     * @throws Throwable
      */
     public function verify(string $passwordDecrypt, string $passwordCrypt): void
     {

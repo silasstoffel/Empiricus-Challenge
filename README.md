@@ -111,7 +111,7 @@ Ao acessar a aplicação, já irá renderizar documentação da API, neste proje
 
 ![image info](./resources/img/swagger1.png)
 
-##Techs
+## Techs
 
 Essa aplicação foi projetada seguindo alguns princípios e techs, tais como:
 

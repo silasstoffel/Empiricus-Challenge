@@ -4,7 +4,7 @@ namespace Empiricus\Domain\Users;
 
 class User
 {
-    private $roles = ['admin', 'customer', 'analist', 'crm'];
+    private $roles = ['admin', 'customer', 'analyst', 'crm'];
     public readonly string $role;
     public readonly string $email;
     public readonly string $name;

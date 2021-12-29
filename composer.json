@@ -24,13 +24,12 @@
       "App\\": "app/",
       "Empiricus\\": "src/",
       "Database\\Factories\\": "database/factories/",
-      "Database\\Seeders\\": "database/seeders/"
+      "Database\\Seeders\\": "database/seeders/",
+      "Tests\\": "tests/"
     }
   },
   "autoload-dev": {
-    "classmap": [
-      "tests/"
-    ]
+    "classmap": []
   },
   "config": {
     "preferred-install": "dist",
@@ -46,6 +45,7 @@
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ],
-    "swagger": "./vendor/bin/openapi --output public/swagger/openapi.json ./app/Swagger --legacy"
+    "swagger": "./vendor/bin/openapi --output public/swagger/openapi.json ./app/Swagger --legacy",
+    "tests": "./vendor/bin/phpunit --colors"
   }
 }
